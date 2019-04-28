@@ -1,0 +1,47 @@
+<html>
+<style>
+table,th,td{
+    border:1px solid black;
+    z-axis= True;
+    color: White;
+    align: center;
+    <!--background-color:cyan;-->
+    
+}
+h1{
+    color: White;
+}
+table{
+
+	margin-left: auto;
+	margin-right: auto;
+    font-size:15px;
+    border-spacing:10px;
+    
+}
+body{
+			background-image: url("../static/image4.jpg");
+			background-size: 100%;
+			text-align: center;
+	}
+
+input[type=submit]{
+            
+            background-color: Black;
+            color: White;
+
+        }
+
+</style>
+<body>
+<h1>Reported Tweets</h1>
+{{data|safe}}
+<br>
+<form action="/delete">
+    <input type="submit" value="Reset table"/>
+</form>
+<form action="/">
+    <input type="submit" value="Back to Main Page"/>
+</form>
+</body>
+</html>

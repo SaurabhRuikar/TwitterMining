@@ -21,8 +21,8 @@ class Decider:
             #self.model = MultinomialNB()
             self.vectorizer = TfidfVectorizer(min_df=3)
         else:
-            self.model= load('rf.joblib')
-            self.vectorizer= pickle.load(open('vectorizer.b','rb'))
+            self.model= load('rf_.joblib')
+            self.vectorizer= pickle.load(open('vectorizer_.b','rb'))
             
             
     def load_data(self):
@@ -33,6 +33,7 @@ class Decider:
         for i in range(len(lines)):
             doc=nlp(lines[i])
             doc=[tok for tok in doc if str(tok) not in string.punctuation]
+            doc=[tok for tok in doc if not tok.is_digit]
             doc=[tok.lemma_.lower().strip() for tok in doc if not tok.is_stop and tok.lemma_!='-PRON-']
             lines[i]=' '.join(doc)
 
@@ -43,11 +44,11 @@ class Decider:
         x_train=self.vectorizer.fit_transform(x_train)
         x_test=self.vectorizer.transform(x_test)
         self.model.fit(x_train,y_train)
-        dump(self.model,'./rf.joblib')
-        pickle.dump(self.vectorizer,open('vectorizer.b','wb'))
+        dump(self.model,'./rf_.joblib')
+        pickle.dump(self.vectorizer,open('vectorizer_.b','wb'))
         
     def predict(self,tweet):
-        tweet=[tweet]
+        #tweet=[tweet]
         self.preprocess(tweet)
         tweet= self.vectorizer.transform(tweet)
         return self.model.predict(tweet)

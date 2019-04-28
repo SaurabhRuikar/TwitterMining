@@ -1,5 +1,46 @@
 <html>
+<style>
+table,th,td{
+    border:1px solid black;
+    z-axis= True;
+    color: White;
+    align: center;
+    font-family: "Poppins",sans-serif;
+    <!--background-color:cyan;-->
+    
+}
+h1{
+    color: White;
+}
+table{
+
+	margin-left: auto;
+	margin-right: auto;
+    font-size:15px;
+    border-spacing:10px;
+    
+}
+body{
+			background-image: url("../static/image4.jpg");
+		
+			background-size: 100%;
+			text-align: center;
+	}
+input[type=submit]{
+			
+			background-color: Black;
+			color: White;
+
+		}
+
+
+</style>
 <body>
+<h1>Results Table</h1>
 {{data|safe}}
+<br>
+<form action="/report">
+<input type="submit" value="REPORT" style="width: 150px; height: 30px"/>
+</form>
 </body>
 </html>
