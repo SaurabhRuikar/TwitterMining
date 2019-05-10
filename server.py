@@ -2,9 +2,9 @@ from flask import Flask,render_template,request
 from control_transfer import Transfer
 import mysql_backend_connector
 import pandas as pd
-app=Flask(__name__)
+app=Flask(__name__,static_url_path="/static")
 handle=Transfer()
-connector=mysql_backend_connector.MysqlBackendConnector("logs","root","1497")
+connector=mysql_backend_connector.MysqlBackendConnector("cybersec","root","1497")
 report_df=""
 def color_cat(data):
     is_in=data.isin(("Offensive","Cyber Bullying"))
@@ -26,6 +26,10 @@ def insert_tweets():
     connector.insert_tweets(tweets_pair)
     #return "<body bgcolor='brown'><h1 align='center'>Successfully inserted</h1></body>"
     return render_template("inserted.html")
+
+@app.route("/index_html")
+def inserted():
+    return render_template("index_.html")
 
 @app.route("/delete")
 def delete():
@@ -56,6 +60,43 @@ def report():
     global report_df
     return render_template("report.html",data=report_df.style.apply(color_cat,subset=['Prediction']).apply(color_cat1,subset=['Prediction']).render())
 
+@app.route("/signup_page")
+def signup_page():
+    return render_template("signup.html")
+
+@app.route("/login_page")
+def login_page():
+    return render_template("login.html")
+
+@app.route("/login",methods=["POST"])
+def login():
+    if connector.login(request.form['username'],request.form['password']):
+        return render_template("index_.html")
+    else:
+        #return "<h1>Error</h1>"
+        return render_template("login.html",error=True)
+
+@app.route("/signup",methods=["GET","POST"])
+def signup():
+    data=request.form
+    connector.signup(data['username'],data['password'],data['email'],data['contact'])
+    return render_template("login.html")
+
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
+@app.route("/team")
+def team():
+    return render_template("team.html")
+
+@app.route("/testimonials")
+def testimonials():
+    return render_template("testimonials.html")
+
+
+
 
 if __name__=='__main__':
-    app.run()
+    app.run(debug=True)
