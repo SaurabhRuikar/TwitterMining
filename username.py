@@ -4,10 +4,10 @@ import tweepy
 import json
 
 
-consumer_key= "e4YnfEaFGyWTjmOQZ1gKOpBT0"
-consumer_secret= "kCmDAkiLppvp7k5vu7bcuEhz7fM3GfqeBsGiYBSYBgMlhmxb1A"
-access_key="1097772392372363264-B4BAsRTSagQzwR22fbvF3KMUzuhooM"
-access_secret="mUwqVfD9UBajeAL9SMFaeV9s19jgjZtDVOyDYpG5qDFMj"
+consumer_key= ""
+consumer_secret= ""
+access_key=""
+access_secret=""
 
 def get_tweets(username):
     
@@ -39,4 +39,4 @@ def get_tweets(username):
 
 
 if __name__ == '__main__': 
-    get_tweets("JasonRobbins97")  
+    get_tweets("")  
